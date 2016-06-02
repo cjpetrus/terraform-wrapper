@@ -39,7 +39,7 @@ class TerraformLock(object):
         self._contents['User'] = os.getlogin()
 
     def _set_hash(self):
-        self._hash = hashlib.md5(json.dumps(self._contents)).hexdigest()
+        self._hash = hashlib.md5(json.dumps(self._contents).encode('utf-8')).hexdigest()
 
     @abc.abstractmethod
     def lock(self):
@@ -86,7 +86,7 @@ class TerraformS3Lock(TerraformLock):
             try:
                 self._client.put_object(Bucket=self._bucket,
                                         Key=self._key,
-                                        Body=io.BytesIO(json.dumps(self._contents)),
+                                        Body=io.BytesIO(json.dumps(self._contents).encode('utf-8')),
                                         ContentType='application/json')
                 self._is_locked = True
             except Exception as e:

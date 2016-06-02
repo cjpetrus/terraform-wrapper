@@ -6,7 +6,7 @@ tfwrapper
 Installation
 ------------
 
-With pip::
+With pip:
  $ pip install tfwrapper
 
 With setuptools:

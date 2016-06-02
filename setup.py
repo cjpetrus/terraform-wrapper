@@ -11,9 +11,6 @@ if sys.version_info[:2] == (2, 6):
 with open('README.rst') as f:
     readme = f.read()
 
-with open('LICENSE') as f:
-    license = f.read()
-
 setup(
     name='tfwrapper',
     version='0.0.1a1',
@@ -31,11 +28,14 @@ setup(
             'argparse>=1.1',
         ]
     },
-    license=license,
+    license='Mozilla Public License Version 2.0',
     classifiers=(
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.5',
         'Natural Language :: English',
         'License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)',
     ),

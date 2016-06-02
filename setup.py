@@ -24,7 +24,7 @@ setup(
     author='David Harris',
     author_email='dharris@dharris.io',
     url='https://github.com/dharrisio/terraform-wrapper',
-    scripts=['bin/terraform-wrapper'],
+    scripts=['bin/tfwrapper'],
     install_requires=requires,
     extras_require={
         ':python_version=="2.6"': [
@@ -39,5 +39,5 @@ setup(
         'Natural Language :: English',
         'License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)',
     ),
-    packages=['terraform-wrapper']
+    packages=['tfwrapper']
 )

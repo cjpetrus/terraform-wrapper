@@ -4,7 +4,6 @@ variable "region" { }
 variable "state_bucket" { }
 variable "state_prefix" { }
 
-variable "instance_ami" { }
 variable "instance_type" { }
 variable "instance_ssh_key" { }
 
@@ -22,8 +21,18 @@ resource "terraform_remote_state" "vpc" {
     region = "${var.region}"
   }
 }
+
+module "ami" {
+  source = "github.com/terraform-community-modules/tf_aws_ubuntu_ami"
+  region = "eu-central-1"
+  distribution = "trusty"
+  architecture = "amd64"
+  virttype = "hvm"
+  storagetype = "instance-store"
+}
+
 resource "aws_instance" "example" {
-  ami             = "${var.instance_ami}"
+  ami             = "${module.ami.ami_id}"
   instance_type   = "${var.instance_type}"
   key_name        = "${var.instance_ssh_key}"
   subnet_id       = "${element(split(",", terraform_remote_state.vpc.output.elb_subnet), 0)}"

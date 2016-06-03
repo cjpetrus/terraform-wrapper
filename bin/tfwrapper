@@ -28,6 +28,14 @@ def remote_state_config(region, bucket, key, path):
     tfr()
 
 
+def get_terraform_modules(path):
+    tf_args = ['get']
+    tfr = TerraformRun(tf_args)
+    if path is not None:
+        tfr.terraform_path = path
+    tfr()
+
+
 def get_terraform_vars(region, bucket, prefix):
     remove_old_file('terraform.tfvars')
     client = boto3.client('s3', region)
@@ -44,11 +52,12 @@ def run_terraform(args, tf_args):
                          tf_prefix + args.key)
     remote_state_config(args.region,
                         args.bucket,
-                        tf_prefix + "terraform.tfstate")
+                        tf_prefix + "terraform.tfstate",
+                        path)
     get_terraform_vars(args.region,
                        args.bucket,
                        tf_prefix)
-
+    get_terraform_modules(path)
     if args.force:
         tf.unlock()
     tf.lock()

@@ -14,7 +14,7 @@ def remove_old_file(filepath):
             raise
 
 
-def remote_state_config(region, bucket, key):
+def remote_state_config(region, bucket, key, path):
     remove_old_file('.terraform/terraform.tfstate')
     tf_args = ['remote',
                'config',
@@ -23,6 +23,8 @@ def remote_state_config(region, bucket, key):
                '-backend-config=key={}'.format(key),
                '-backend-config=region={}'.format(region)]
     tfr = TerraformRun(tf_args)
+    if path is not None:
+        tfr.terraform_path = path
     tfr()
 
 
@@ -33,6 +35,9 @@ def get_terraform_vars(region, bucket, prefix):
 
 
 def run_terraform(args, tf_args):
+    path = None
+    if args.path:
+        path = args.path
     tf_prefix = "terraform/" + args.environment + "/" + args.prefix + "/"
     tf = TerraformS3Lock(args.region,
                          args.bucket,
@@ -48,6 +53,8 @@ def run_terraform(args, tf_args):
         tf.unlock()
     tf.lock()
     tfr = TerraformRun(tf_args)
+    if path is not None:
+        tfr.terraform_path = path
     tfr()
     tf.unlock()
 

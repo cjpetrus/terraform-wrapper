@@ -2,7 +2,7 @@ import sys
 from setuptools import setup
 
 requires = ['botocore>=1.4.23',
-            'boto3>=1.3.0'
+            'boto3>=1.3.0',
             's3transfer>=0.0.1']
 
 if sys.version_info[:2] == (2, 6):
@@ -14,7 +14,7 @@ with open('README.rst') as f:
 
 setup(
     name='tfwrapper',
-    version='0.0.1a3',
+    version='0.0.1a4',
     description='''
     Python wrapper for Terraform (https://www.terraform.io) that provides remote state management and basic locking
     ''',

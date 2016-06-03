@@ -1,4 +1,5 @@
 import os
+import pwd
 import io
 import hashlib
 import json
@@ -36,7 +37,7 @@ class TerraformLock(object):
 
     def _set_contents(self):
         self._contents['Time'] = datetime.utcnow().isoformat("T")
-        self._contents['User'] = os.getlogin()
+        self._contents['User'] = pwd.getpwuid(os.getuid())[0]
 
     def _set_hash(self):
         self._hash = hashlib.md5(json.dumps(self._contents).encode('utf-8')).hexdigest()

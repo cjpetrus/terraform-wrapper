@@ -14,7 +14,7 @@ with open('README.rst') as f:
 
 setup(
     name='tfwrapper',
-    version='0.0.1a8',
+    version='0.0.1a9',
     description='''
     Python wrapper for Terraform (https://www.terraform.io) that provides remote state management and basic locking
     ''',

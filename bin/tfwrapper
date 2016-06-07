@@ -46,7 +46,7 @@ def run_terraform(args, tf_args):
     path = None
     if args.path:
         path = args.path
-    tf_prefix = "terraform/" + args.environment + "/" + args.prefix + "/"
+    tf_prefix = "terraform/" + args.env.lower() + "/" + args.prefix + "/"
     tf = TerraformS3Lock(args.region,
                          args.bucket,
                          tf_prefix + args.key)
@@ -74,8 +74,8 @@ if __name__ == '__main__':
                         default=os.environ.get('TF_VAR_region', None),
                         type=str)
     parser.add_argument('-e',
-                        '--environment',
-                        default=os.environ.get('TF_VAR_environment', None),
+                        '--env',
+                        default=os.environ.get('TF_VAR_env', None),
                         type=str)
     parser.add_argument('-b',
                         '--bucket',

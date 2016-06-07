@@ -87,7 +87,7 @@ if __name__ == '__main__':
                         type=str)
     parser.add_argument('-k',
                         '--key',
-                        default=os.environ.get('TF_VAR_state_key', None),
+                        default=os.environ.get('TF_VAR_tf_lock_key', None),
                         type=str)
     parser.add_argument('--path',
                         default=os.environ.get('TF_VAR_terraform_path', None),
